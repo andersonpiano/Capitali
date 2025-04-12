@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark text-white">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -87,37 +87,27 @@
             });
         </script>
     @endif
-    <!-- Modal base (deve ficar no layout padrão para reaproveitar em todas as páginas) -->
-    <div id="modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden">
-        <div class="flex items-center justify-center min-h-screen p-4">
-            <div class="bg-gray-900 text-white p-6 rounded-lg shadow-lg w-full max-w-2xl relative">
-                <button id="modal-close" class="absolute top-2 right-2 text-white text-xl hover:text-red-500">&times;</button>
-                <div id="modal-content">
-                    <!-- Conteúdo do modal será injetado aqui -->
-                </div>
-            </div>
+    <!-- Modal Global -->
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden flex items-center justify-center">
+        <div class="bg-gray-800 text-white p-6 rounded-2xl shadow-2xl w-full max-w-2xl relative">
+            <button onclick="closeModal()" class="absolute top-2 right-2 text-white hover:text-red-500">&times;</button>
+            @yield('modal-content')
         </div>
     </div>
-
     <script>
-        // Lógica para abrir o modal dinamicamente
-        document.querySelectorAll('.open-modal').forEach(button => {
-            button.addEventListener('click', async (e) => {
-                e.preventDefault();
-                const url = button.getAttribute('data-url');
-                const response = await fetch(url);
-                const html = await response.text();
-                document.getElementById('modal-content').innerHTML = html;
-                document.getElementById('modal').classList.remove('hidden');
-            });
-        });
+    function openModal() {
+        document.getElementById('modal').classList.remove('hidden');
+    }
 
-        // Fechar o modal
-        document.addEventListener('click', function(e) {
-            if (e.target && e.target.id === 'modal-close-inside') {
-                document.getElementById('modal').classList.add('hidden');
-            }
-        });
-    </script>
+    function closeModal() {
+        document.getElementById('modal').classList.add('hidden');
+    }
+
+    // Permitir fechar com tecla ESC
+    document.addEventListener('keydown', function(event) {
+        if (event.key === "Escape") closeModal();
+    });
+</script>
+
 </body>
 </html>
