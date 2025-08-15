@@ -6,16 +6,15 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Capitali') }}</title>
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
-        <link rel="icon" href="{{ asset('img/logo.svg') }}" type="image/x-icon">
-        <link rel="shortcut icon" href="{{ asset('img/logo.svg') }}" type="image/x-icon">
 
         <!-- Fonts -->
+        <link rel="icon" href="{{ asset('img/logo.svg') }}" type="image/x-icon">
+        <link rel="shortcut icon" href="{{ asset('img/logo.svg') }}" type="image/x-icon">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        
 
         <!-- CSS do DataTables (remova se estiver importando via app.css) -->
         @stack('styles')
@@ -50,6 +49,11 @@
                 @endif
             </div>
         </div>
+
+        <!-- jQuery e Bootstrap (antes dos scripts) -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
         @stack('scripts')
     </body>
 </html>
